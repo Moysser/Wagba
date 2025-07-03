@@ -1,0 +1,8 @@
+# Depenencies git config core.excludefile /.gitignore
+
+/.package.json
+/.package-lock.json
+
+# Testing
+
+# Production

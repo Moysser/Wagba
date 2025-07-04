@@ -22,7 +22,7 @@ const Body = () => {
       const resJson = await response.json();
 
       const cards = resJson.data.cards;
-      const pageheader = cards.splice(0, 3);
+      cards.splice(0, 3);
 
       setMealCard(cards);
     } catch (err) {

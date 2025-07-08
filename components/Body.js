@@ -6,6 +6,7 @@ import { Link } from "react-router";
 const Body = () => {
   const mealCardArr = useState([]);
   const [filteredFoodCards, setFilteredFoodCards] = useState([]);
+  const [TopMealBtn, setTopMealBtn] = useState("Top Meals");
   const [searchText, setSearchText] = useState("");
   const mealCards = mealCardArr[0];
   const setMealCard = mealCardArr[1];
@@ -62,6 +63,27 @@ const Body = () => {
             }}
           >
             search
+          </button>
+        </div>
+
+        <div className="filtered-meal">
+          <button
+            className="filter_btn"
+            onClick={() => {
+              const filteredCards = resCards.filter((card) => {
+                return card.card.card.info.avgRating > 4;
+              });
+
+              if (TopMealBtn === "Top Meals") {
+                setFilteredFoodCards(filteredCards);
+                setTopMealBtn("All Meals");
+              } else {
+                setFilteredFoodCards(resCards);
+                setTopMealBtn("Top Meals");
+              }
+            }}
+          >
+            {TopMealBtn}
           </button>
         </div>
       </div>

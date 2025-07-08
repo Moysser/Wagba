@@ -5,7 +5,8 @@ import { Link } from "react-router";
 
 const Body = () => {
   const mealCardArr = useState([]);
-
+  const [filteredFoodCards, setFilteredFoodCards] = useState([]);
+  const [searchText, setSearchText] = useState("");
   const mealCards = mealCardArr[0];
   const setMealCard = mealCardArr[1];
 
@@ -37,8 +38,35 @@ const Body = () => {
 
   return (
     <div className="body">
+      <div className="filter-container">
+        <div className="search">
+          <input
+            type="text"
+            placeholder="search a meal"
+            className="meal-search"
+            value={searchText}
+            onChange={(e) => {
+              setSearchText(e.target.value);
+              setFilteredFoodCards(resCards);
+            }}
+          />
+          <button
+            onClick={() => {
+              const searchedMeal = resCards.filter((card) => {
+                return card.card.card.info.name
+                  .toLocaleLowerCase()
+                  .includes(searchText.toLocaleLowerCase());
+              });
+
+              setFilteredFoodCards(searchedMeal);
+            }}
+          >
+            search
+          </button>
+        </div>
+      </div>
       <div className="food-container">
-        {mealCardArr.map((wagbaCard) => {
+        {filteredFoodCards.map((wagbaCard) => {
           const id = wagbaCard.card.card.info.id;
           return (
             <Link to={"/restaurants/" + id} key={id}>

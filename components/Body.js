@@ -1,5 +1,6 @@
 import FoodCard from "./FoodCard";
 import { useState, useEffect } from "react";
+import useOlineStatus from "../utils/useOnlineStatus";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router";
 
@@ -10,6 +11,7 @@ const Body = () => {
   const [searchText, setSearchText] = useState("");
   const mealCards = mealCardArr[0];
   const setMealCard = mealCardArr[1];
+  const onlineStatus = useOlineStatus();
 
   useEffect(() => {
     fetchData();
@@ -32,9 +34,12 @@ const Body = () => {
     }
   };
 
-  // Conditional rendering
   if (mealCards.length === 0) {
     return <Shimmer />;
+  }
+
+  if (onlineStatus === false) {
+    return <h1>Check your internet connection!</h1>;
   }
 
   return (

@@ -51,7 +51,7 @@
   border: 1px solid #000;
 }
 
-.meal-card-img {
+.card-img {
   width: 100%;
 }
 
@@ -95,6 +95,8 @@
 }
 
 .shimmer-cards {
+  align-items: center;
+  justify-content: center;
   display: flex;
   gap: 4px;
   flex-wrap: wrap;

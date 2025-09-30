@@ -1,8 +1,6 @@
-# Depenencies git config core.excludefile /.gitignore
+/node_modules
+/dist
+.parcel-cache
 
-/.package.json
-/.package-lock.json
 
-# Testing
 
-# Production

@@ -1,27 +1,64 @@
 import React from "react";
-import ReactDOM from "react-dom";
+import ReactDOM from "react-dom/client";
+import Body from "./src/components/Body";
+import Header from "./src/components/Header";
+import About from "./src/components/About";
+import Contact from "./src/components/Contact";
+import Login from "./src/components/Login";
+import RestaurantMenu from "./src/components/RestaurantMenu";
+import {
+  HydratedRouter,
+  Routes,
+  Route,
+  RouterProvider,
+  createBrowserRouter,
+  Outlet,
+  Form,
+} from "react-router";
+// import Error from "./src/components/Error";
+import "./app.css";
+import RestaurantMenu from "./src/components/RestaurantMenu";
 
-const Logo = () => {
-  return <div className="logo"></div>;
-};
-
-const NaveItem = () => {
+const AppLayout = () => {
+  // console.log(Header());
   return (
-    <div className="nav-items">
-      <ul className="list-items">
-        <li className="list-item"></li>
-        <li className="list-item"></li>
-        <li className="list-item"></li>
-        <li className="list-item"></li>
-      </ul>
+    <div className="app">
+      <Header />
+      <Outlet />
     </div>
   );
 };
 
-const App = () => {
-  <Logo />;
-};
+const appRouter = createBrowserRouter([
+  {
+    path: "/",
+    element: AppLayout(),
+    children: [
+      {
+        path: "/",
+        element: <Body />,
+      },
+      {
+        path: "/about",
+        element: <About />,
+      },
+      {
+        path: "/contact",
+        element: <Contact />,
+      },
+      {
+        path: "/login",
+        element: <Login />,
+      },
+      {
+        path: "/restaurants/:nameIt",
+        element: <RestaurantMenu />,
+      },
+    ],
+    // errorElement: <Error />,
+  },
+]);
 
-const root = ReactDOM.createRoot(Document.getElementById("root"));
+const root = ReactDOM.createRoot(document.getElementById("root"));
 
-root.render(App);
+root.render(<RouterProvider router={appRouter} />);
